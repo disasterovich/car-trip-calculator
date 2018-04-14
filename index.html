@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+    <head>
+	<meta charset="UTF-8">
+    </head>
+<body>
+
+<div id="car-trip-calculator">
+
+	<div>Дистанция, в км.: <input v-model.number="distance" type="number" placeholder="Дистанция, в км." step="10" /></div>
+
+	<div>Цена за 1 литр топлива, в RUR: <input v-model.number="price_per_liter" type="number" placeholder="Цена за 1 литр топлива, в RUR" /></div>
+
+	<div>Расход топлива на 100 км., в литрах: <input v-model.number="consumption" type="number" placeholder="Расход топлива на 100 км., в литрах" /></div>
+
+	<div>Расход топлива, в литрах: {{Math.round(fuel*10)/10}}</div>
+
+	<div>Стоимость поездки (примерно), в RUR: {{Math.round(cost/10)*10}}</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+
+var calculator = new Vue({
+  el: '#car-trip-calculator',
+  data: {
+
+	consumption : 8,
+	price_per_liter : 42,
+	distance : 140, //km
+  },
+
+  computed: {
+
+    fuel : function () {
+	return this.consumption*this.distance/100;
+    },
+    cost : function () {
+	return this.fuel*this.price_per_liter;
+    },
+  }
+
+})
+
+</script>
+	
+    </body>
+</html>
